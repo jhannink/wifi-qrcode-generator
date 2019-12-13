@@ -49,8 +49,6 @@ public class Main implements Callable<Void> {
 
     WifiQrCodeGenerator generator = new WifiQrCodeGenerator();
 
-    System.out.println(hidden);
-
     generator.withSsid(ssid)
              .isHidden(hidden)
              .withAuthenticationMode(authenticationMode)
