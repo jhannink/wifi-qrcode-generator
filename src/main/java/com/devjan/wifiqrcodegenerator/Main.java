@@ -28,6 +28,9 @@ public class Main implements Callable<Void> {
   @Option(names = { "-a", "--auth-mode" }, description = "Authentication mode used by the wifi (WPA, WEP or nopass")
   private String authenticationMode = "WPA";
 
+  @Option(names = {"-h", "--hidden"}, description = "Is the network hidden? Values are true / false")
+  private Boolean hidden = false;
+
   @Parameters(index = "0", paramLabel = "OUTPUT-FILE", description = "Output file, currently only PNG is supported")
   private String outputFile;
 
@@ -46,13 +49,13 @@ public class Main implements Callable<Void> {
 
     WifiQrCodeGenerator generator = new WifiQrCodeGenerator();
 
+    System.out.println(hidden);
+
     generator.withSsid(ssid)
+             .isHidden(hidden)
              .withAuthenticationMode(authenticationMode)
              .withPassword(password)
              .toOutputFile(outputFile);
-    if (verbose) {
-      System.out.println(generator.toString());
-    }
 
     try {
       generator.generateQrCodePicture();

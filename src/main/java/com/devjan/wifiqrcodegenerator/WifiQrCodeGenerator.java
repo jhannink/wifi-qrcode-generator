@@ -35,6 +35,7 @@ public class WifiQrCodeGenerator {
   private static final String QR_WIFI_AUTHENTICATION_TYP = "T";
   private static final String QR_WIFI_SSID = "S";
   private static final String QR_WIFI_PASSWORD = "P";
+  private static final String QR_WIFI_HIDDEN = "H";
 
   private static final int QR_CODE_SIZE = 1600;
   private static final String QR_CODE_FILE_FORMAT = "PNG";
@@ -42,6 +43,7 @@ public class WifiQrCodeGenerator {
   private String ssid;
   private String password;
   private AuthenticationMode authenticationMode;
+  private boolean hidden;
   private File outputFile;
 
   public void generateQrCodePicture() throws WriterException, IOException {
@@ -54,14 +56,22 @@ public class WifiQrCodeGenerator {
   }
 
   protected String getPaylodString() {
+
     StringBuilder payloadBuilder = new StringBuilder();
     payloadBuilder.append(QR_WIFI).append(SEPARATOR_VALUE)
                   .append(QR_WIFI_AUTHENTICATION_TYP).append(SEPARATOR_VALUE).append(authenticationMode).append(SEPARATOR_FIELD)
                   .append(QR_WIFI_SSID).append(SEPARATOR_VALUE).append(ssid).append(SEPARATOR_FIELD)
                   .append(QR_WIFI_PASSWORD).append(SEPARATOR_VALUE).append(StringUtils.isNotEmpty(password) ? password : "").append(SEPARATOR_FIELD)
-                  // TODO: Hidden network config
+                  .append(QR_WIFI_HIDDEN).append(SEPARATOR_VALUE).append(hidden ? "true": "false").append(SEPARATOR_FIELD)
                   .append(SEPARATOR_FIELD);
+
+    System.out.println("Payload: " + payloadBuilder.toString());
     return payloadBuilder.toString();
+  }
+
+  public WifiQrCodeGenerator isHidden(boolean hidden){
+    this.hidden = hidden;
+    return this;
   }
 
   public WifiQrCodeGenerator withSsid(String ssid) {
