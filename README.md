@@ -1,6 +1,8 @@
 # wifi-qrcode-generator
 Simple CLI application to generate QR Codes for wifi-connections.
 
+Fork of https://github.com/dev-jan/wifi-qrcode-generator + support of hidden WIFI 
+
 ![build status](https://travis-ci.org/dev-jan/wifi-qrcode-generator.svg?branch=master)
 ![MIT license](https://img.shields.io/github/license/dev-jan/wifi-qrcode-generator.svg)
 
@@ -34,10 +36,14 @@ Run...
 ```
 
 Example command:
-```
+```bash
 $ ./build/install/wifi-qrcode-generator/bin/wifi-qrcode-generator --ssid "SomeNetwork" -p "asdf" -a WPA example.png
 Generating QR code...
 QR code generated. Output: example.png
+
 ```
+Use the CLI option `-h` to indicate hidden SSIDs.
 
 Now you can print out the QR code and let others connect to your wifi without typing your 20-digit password into there phones :smiley:
+
+
